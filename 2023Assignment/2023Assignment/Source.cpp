@@ -7,7 +7,7 @@
 int main()
 {
     // Read the mountain names from the input files
-    std::vector<std::string> filenames = {"alps.txt", "pyrenees.txt", "carpathians.txt", "icelandic_highlands.txt"};
+    std::vector<std::string> filenames = {"Alps.txt", "Pyrenees.txt", "Carpathians.txt", "Icelandic Highlands.txt"};
     Mountains mountains(filenames);
 
     // Start the quiz

@@ -20,10 +20,8 @@ int main()
         for (const auto& mountain : mountains) {
             std::cout << " - " << mountain << std::endl;
         }
+	 
     }
-
-    // Print the size of the "ranges" map
-    std::cout << "Number of ranges: " << mountains.ranges.size() << std::endl;
-    
+    mountains.getRandomMountain(); 
     return 0;
 }

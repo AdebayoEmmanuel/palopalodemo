@@ -6,6 +6,9 @@
 #include <string>     // for std::string
 #include <vector>     // for std::vector
 
+std::map<std::string, std::vector<std::string>> ranges;  // map of mountain ranges to mountain names
+
+
 Mountains::Mountains(std::vector<std::string>& filenames)
 {
     // Open each file and store the mountains in the corresponding range in the map
@@ -25,10 +28,12 @@ std::string Mountains::getRandomMountain()
     // Select a random range from the map
     std::random_device rd;
     std::mt19937 rng(rd());
+    std::cout << "Number of ranges: " << ranges.size() << std::endl;
     std::uniform_int_distribution<int> dist(0, ranges.size() - 1);
     auto range_it = ranges.begin();
     std::advance(range_it, dist(rng));  // move the iterator to a random position in the map
     const auto& range = range_it->first;  // get the name of the selected range
+
 
     // Select a random mountain from the selected range
     std::uniform_int_distribution<int> mountain_dist(0, range_it->second.size() - 1);
