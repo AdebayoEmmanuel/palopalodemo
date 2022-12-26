@@ -7,6 +7,8 @@
 class Mountains
 {
 public:
+	std::map<std::string, std::vector<std::string>> ranges;  // map of mountain ranges to mountain names
+	
 	//Time complexity: 
 	Mountains(std::vector<std::string>& filenames);
 
