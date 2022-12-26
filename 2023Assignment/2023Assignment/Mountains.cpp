@@ -1,7 +1,3 @@
-// To implement the Mountains class, you can use a std::map where the keys are the mountain ranges and the values are std::vectors of mountain names in that range.
-
-// Here is one way you can implement the Mountains class based on the requirements you provided:
-
 #include "Mountains.h"
 #include <algorithm>  // for std::find
 #include <fstream>    // for std::ifstream
@@ -14,47 +10,40 @@ std::map<std::string, std::vector<std::string>> ranges;  // map of mountain rang
 
 Mountains::Mountains(std::vector<std::string>& filenames)
 {
-    // Read the mountain names from the input files
-    for (size_t i = 0; i < filenames.size(); i++) {
-        std::string range = filenames[i];
-        std::string filename = range + ".txt";
-
+    // Open each file and store the mountains in the corresponding range in the map
+    for (const auto& filename : filenames) {
         std::ifstream file(filename);
-        if (file.is_open()) {
-            std::string mountain;
-            while (getline(file, mountain)) {
-                ranges[range].push_back(mountain);
-            }
-            file.close();
+        std::string mountain;
+        std::string range = filename;  // extract the range name from the filename
+        range = range.substr(0, range.find(".txt"));  // remove the ".txt" extension from the filename
+        while (std::getline(file, mountain)) {  // read each mountain name from the file
+            ranges[range].push_back(mountain);  // add the mountain to the corresponding range
         }
     }
 }
 
 std::string Mountains::getRandomMountain()
 {
-    // Select a random mountain range
+    // Select a random range from the map
     std::random_device rd;
     std::mt19937 rng(rd());
-    std::uniform_int_distribution<> dist(0, ranges.size() - 1);
-    int index = dist(rng);
-    auto it = ranges.begin();
-    std::advance(it, index);
-    std::string range = it->first;
+    std::uniform_int_distribution<int> dist(0, ranges.size() - 1);
+    auto range_it = ranges.begin();
+    std::advance(range_it, dist(rng));  // move the iterator to a random position in the map
+    const auto& range = range_it->first;  // get the name of the selected range
 
     // Select a random mountain from the selected range
-    std::vector<std::string>& mountains = it->second;
-    std::uniform_int_distribution<> dist2(0, mountains.size() - 1);
-    int index2 = dist2(rng);
-    return mountains[index2];
+    std::uniform_int_distribution<int> mountain_dist(0, range_it->second.size() - 1);
+    return range_it->second[mountain_dist(rng)];  // return the randomly selected mountain
 }
 
 bool Mountains::checkRange(std::string mountain, std::string range)
 {
-    // Check if the mountain is in the given range
+    // Search for the mountain in the range
     for (const auto& [r, mountains] : ranges) {
         if (r == range && std::find(mountains.begin(), mountains.end(), mountain) != mountains.end()) {
-            return true;
+            return true;  // mountain was found in the range
         }
     }
-    return false;
+    return false;  // mountain was not found in the range
 }
