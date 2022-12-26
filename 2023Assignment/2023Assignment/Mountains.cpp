@@ -11,9 +11,9 @@ Mountains::Mountains(std::vector<std::string>& filenames)
     // Open each file and store the mountains in the corresponding range in the map
     for (const auto& filename : filenames) {
         std::ifstream file(filename);
-        std::string range;
-        std::getline(file, range);  // read the range name from the first line of the file
         std::string mountain;
+        std::string range = filename;  // extract the range name from the filename
+        range = range.substr(0, range.find(".txt"));  // remove the ".txt" extension from the filename
         while (std::getline(file, mountain)) {  // read each mountain name from the file
             ranges[range].push_back(mountain);  // add the mountain to the corresponding range
         }
