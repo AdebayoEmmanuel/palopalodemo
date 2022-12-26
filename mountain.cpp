@@ -53,4 +53,6 @@ bool Mountains::checkRange(std::string mountain, std::string range)
 
 //The getRandomMountain method has a time complexity of O(1) on average, because it selects a random mountain from the map in constant time. However, the time complexity is O(n) in the worst case, because it may have to iterate through all the mountains in the map to select a random range if the map is not uniformly distributed.
 
-//The checkRange method has a time complexity of O(
+//The checkRange function has a time complexity of O(n), where n is the total number of mountains in all the ranges. This is because it iterates through all the ranges in the map and checks if the given mountain is in the given range.
+
+//In the worst case, the function will have to check every mountain in every range to determine if the given mountain is in the given range. This results in a time complexity of O(n), where n is the total number of mountains in all the ranges.
