@@ -22,5 +22,8 @@ int main()
         }
     }
 
+    // Print the size of the "ranges" map
+    std::cout << "Number of ranges: " << mountains.ranges.size() << std::endl;
+    
     return 0;
 }
