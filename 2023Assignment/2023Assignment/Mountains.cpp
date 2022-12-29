@@ -28,7 +28,6 @@ std::string Mountains::getRandomMountain()
     // Select a random range from the map
     std::random_device rd;
     std::mt19937 rng(rd());
-    std::cout << "Number of ranges: " << ranges.size() << std::endl;
     std::uniform_int_distribution<int> dist(0, ranges.size() - 1);
     auto range_it = ranges.begin();
     std::advance(range_it, dist(rng));  // move the iterator to a random position in the map
